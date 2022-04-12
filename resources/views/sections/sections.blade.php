@@ -34,7 +34,15 @@
 							</button>
 						</div>
 					@endif
-					
+					@if (session()->has('Error'))
+						<div class="alert alert-danger alert-dismissible fade show" role="alert">
+							<strong>{{ session()->get('Error') }}</strong>
+							<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+								<span aria-hidden="true">&times;</span>
+							</button>
+						</div>
+					@endif
+
 					<!--div-->
 					<div class="col-xl-12">
 						<div class="card mg-b-20">
@@ -57,12 +65,16 @@
 											</tr>
 										</thead>
 										<tbody>
-											<tr>
-												<td>1</td>
-												<td>2345</td>
-												<td>06-04-2022</td>
-												<td>06-04-2022</td>
-											</tr>
+											<?php $i =0?>
+											@foreach ($sections as $section)
+											<?php $i++?>	
+												<tr>
+													<td>{{$i}}</td>
+													<td>{{$section->section_name}}</td>
+													<td>{{$section->description}}</td>
+												</tr>
+											@endforeach
+											
 										</tbody>
 									</table>
 								</div>
