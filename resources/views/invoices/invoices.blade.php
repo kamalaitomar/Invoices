@@ -38,22 +38,34 @@
 										<table id="example" class="table key-buttons text-md-nowrap">
 											<thead>
 												<tr>
-													<th class="border-bottom-0">Name</th>
-													<th class="border-bottom-0">Position</th>
-													<th class="border-bottom-0">Office</th>
-													<th class="border-bottom-0">Age</th>
-													<th class="border-bottom-0">Start date</th>
-													<th class="border-bottom-0">Salary</th>
+													<th class="border-bottom-0">#</th>
+													<th class="border-bottom-0">رقم الفاتورة</th>
+													<th class="border-bottom-0">تاريخ الفاتورة</th>
+													<th class="border-bottom-0">تاريخ الإستحقاق</th>
+													<th class="border-bottom-0">المنتج</th>
+													<th class="border-bottom-0">القسم</th>
+													<th class="border-bottom-0">الخصم</th>
+													<th class="border-bottom-0">نسبة الضريبة</th>
+													<th class="border-bottom-0">قيمة الضريبة</th>
+													<th class="border-bottom-0">الإجمالي</th>
+													<th class="border-bottom-0">الحالة</th>
+													<th class="border-bottom-0">الملاحظات</th>
 												</tr>
 											</thead>
 											<tbody>
 												<tr>
-													<td>Tiger Nixon</td>
-													<td>System Architect</td>
-													<td>Edinburgh</td>
-													<td>61</td>
-													<td>2011/04/25</td>
-													<td>$320,800</td>
+													<td>1</td>
+													<td>2345</td>
+													<td>06-04-2022</td>
+													<td>06-04-2022</td>
+													<td>High Gloss</td>
+													<td>KML</td>
+													<td>0%</td>
+													<td>15%</td>
+													<td>500</td>
+													<td>2300</td>
+													<td>مدفوعة</td>
+													<td>تم تسديد الفاتورة نقدا</td>
 												</tr>
 											</tbody>
 										</table>
