@@ -5,6 +5,11 @@
 <!-- Maps css -->
 <link href="{{URL::asset('assets/plugins/jqvmap/jqvmap.min.css')}}" rel="stylesheet">
 @endsection
+
+@section('title')
+الرئيسية
+@stop
+
 @section('page-header')
 				<!-- breadcrumb -->
 				<div class="breadcrumb-header justify-content-between">
