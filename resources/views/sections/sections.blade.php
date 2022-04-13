@@ -57,6 +57,15 @@
 						</button>
 					</div>
 				@endif
+
+				@if(session()->has('delete'))
+					<div class="alert alert-danger alert-dismissible fade show" role="alert">
+						<strong>{{ session()->get('delete') }}</strong>
+						<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+					</div>
+				@endif
 				<!-- row -->
 				<div class="row">
 
@@ -141,6 +150,8 @@
 					<!-- End Basic modal -->
 				</div>
 				<!-- row closed -->
+
+				{{-- update model --}}
 				<div class="modal fade" id="exampleModal2" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
 					<div class="modal-dialog" role="document">
 						<div class="modal-content">
@@ -171,6 +182,31 @@
 							</div>
 							</form>
 						</div>
+					</div>
+				</div>
+
+				{{-- delete model --}}
+				<div class="modal" id="modaldemo9">
+					<div class="modal-dialog modal-dialog-centered" role="document">
+						<div class="modal-content modal-content-demo">
+							<div class="modal-header">
+								<h6 class="modal-title">حذف القسم</h6><button aria-label="Close" class="close" data-dismiss="modal"
+																			   type="button"><span aria-hidden="true">&times;</span></button>
+							</div>
+							<form action="sections/destroy" method="post">
+								{{method_field('delete')}}
+								{{csrf_field()}}
+								<div class="modal-body">
+									<p>هل انت متاكد من عملية الحذف ؟</p><br>
+									<input type="hidden" name="id" id="id" value="">
+									<input class="form-control" name="section_name" id="section_name" type="text" readonly>
+								</div>
+								<div class="modal-footer">
+									<button type="button" class="btn btn-secondary" data-dismiss="modal">الغاء</button>
+									<button type="submit" class="btn btn-danger">تاكيد</button>
+								</div>
+						</div>
+						</form>
 					</div>
 				</div>
 			</div>
@@ -210,6 +246,17 @@
 		modal.find('.modal-body #id').val(id);
 		modal.find('.modal-body #section_name').val(section_name);
 		modal.find('.modal-body #description').val(description);
+	})
+</script>
+
+<script>
+	$('#modaldemo9').on('show.bs.modal', function(event) {
+		var button = $(event.relatedTarget)
+		var id = button.data('id')
+		var section_name = button.data('section_name')
+		var modal = $(this)
+		modal.find('.modal-body #id').val(id);
+		modal.find('.modal-body #section_name').val(section_name);
 	})
 </script>
 @endsection

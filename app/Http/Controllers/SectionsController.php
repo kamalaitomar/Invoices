@@ -129,8 +129,13 @@ class SectionsController extends Controller
      * @param  \App\Models\sections  $sections
      * @return \Illuminate\Http\Response
      */
-    public function destroy(sections $sections)
+    public function destroy(Request $request, sections $sections)
     {
-        //
+        $id = $request->id;
+        $section_name = sections::findOrFail($id)->section_name;
+        sections::findOrFail($id)->delete();
+        session()->flash('delete','تم حذف قسم '.$section_name.' بنجاج');
+        return redirect('/sections');
+
     }
 }
