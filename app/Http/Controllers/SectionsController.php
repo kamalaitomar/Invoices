@@ -39,26 +39,27 @@ class SectionsController extends Controller
      */
     public function store(Request $request)
     {
+
+        $validated = $request->validate([
+            'section_name' => 'bail|required|unique:sections|max:255',
+            'description' => 'required',
+        ],[
+
+            'section_name.required' =>'يرجى إدخال إسم القسم', 
+            'section_name.unique' =>'إسم القسم موجود سابقا' ,
+            'section_name.max' =>'يرجى إدخال إسم قسم أقل من 255 حرف' ,
+            'description.required' =>'يرجى إدخال الوصف ' 
+            
+        ]);
         
-        $input = $request->all();
-
-        $b_exists = sections::where('section_name', '=', $input['section_name'])->exists();
-
-        if($b_exists){
-            session()->flash('Error', 'خطأ القسم مسجل مسبقا');
-            return redirect('/sections');
-        }
-        else{
             sections::create([
                 'section_name' => $request->section_name,
                 'description' => $request->description,
                 'created_by' => (Auth::user()->name),
-
             ]);
+
             session()->flash('Add', 'تم اضافة القسم بنجاح ');
-            return redirect('/sections');
-        }
-            
+            return redirect('/sections');        
 
     }
 
@@ -93,7 +94,33 @@ class SectionsController extends Controller
      */
     public function update(Request $request, sections $sections)
     {
-        //
+
+        $id =  $request->id;
+
+        $validated = $request->validate([
+            'section_name' => 'required|max:255|unique:sections,section_name,'.$id,
+            'description' => 'required',
+        ],[
+
+            'section_name.required' =>'يرجى إدخال إسم القسم', 
+            'section_name.unique' =>'إسم القسم موجود سابقا' ,
+            'section_name.max' =>'يرجى إدخال إسم قسم أقل من 255 حرف' ,
+            'description.required' =>'يرجى إدخال الوصف ' 
+            
+        ]);
+
+        $section = sections::findOrFail($id);
+
+        $section->section_name = $request->section_name;
+        $section->description = $request->description;
+        $section->created_by = (Auth::user()->name);
+
+        $section->save();
+
+        
+
+        session()->flash('edit','تم تعديل القسم بنجاج');
+        return redirect('/sections');
     }
 
     /**
