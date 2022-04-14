@@ -37,7 +37,27 @@ class ProductsController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validated = $request->validate([
+            'product_name' => 'bail|required|unique:products|max:255',
+            'section_id' => 'required',
+            'description' => 'required',
+        ],[
+
+            'product_name.required' =>'يرجى إدخال إسم المنتج', 
+            'product_name.unique' =>'إسم المنتج موجود سابقا' ,
+            'product_name.max' =>'يرجى إدخال إسم منتج أقل من 255 حرف' ,
+            'description.required' =>'يرجى إدخال الوصف ' 
+            
+        ]);
+        
+            products::create([
+                'product_name' => $request->product_name,
+                'section_id' => $request->section_id,
+                'description' => $request->description,
+            ]);
+
+            session()->flash('Add', 'تم اضافة المنتج بنجاح ');
+            return redirect('/products');
     }
 
     /**
