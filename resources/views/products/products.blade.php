@@ -8,6 +8,11 @@
 <link href="{{URL::asset('assets/plugins/datatable/css/responsive.dataTables.min.css')}}" rel="stylesheet">
 <link href="{{URL::asset('assets/plugins/select2/css/select2.min.css')}}" rel="stylesheet">
 @endsection
+
+@section('title')
+قائمة المنتجات
+@stop
+
 @section('page-header')
 				<!-- breadcrumb -->
 				<div class="breadcrumb-header justify-content-between">
@@ -51,19 +56,21 @@
 						<div class="card mg-b-20">
 							<div class="card-body">
 								<div class="table-responsive">
-									<table id="example" class="table key-buttons text-md-nowrap">
+									<table id="example1" class="table key-buttons text-md-nowrap" data-page-length="50">
 										<thead>
 											<tr>
 												<th class="border-bottom-0">#</th>
-												<th class="border-bottom-0">رقم المنتج</th>
-												<th class="border-bottom-0">رقم المنتج</th>
-												<th class="border-bottom-0">رقم المنتج</th>
+												<th class="border-bottom-0">إسم المنتج</th>
+												<th class="border-bottom-0">إسم القسم</th>
+												<th class="border-bottom-0">الملاحظات</th>
+												<th class="border-bottom-0">العمليات</th>
 												
 											</tr>
 										</thead>
 										<tbody>
 											<tr>
 												<td>1</td>
+												<td>2345</td>
 												<td>2345</td>
 												<td>2345</td>
 												<td>2345</td>
