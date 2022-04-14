@@ -54,6 +54,13 @@
 				<div class="row">
 					<div class="col-xl-12">
 						<div class="card mg-b-20">
+							<div class="card-header pb-0">
+								<div class="d-flex justify-content-between">
+									<div class="col-sm-6 col-md-4 col-xl-3">
+										<a class="modal-effect btn btn-outline-primary btn-block" data-effect="effect-scale" data-toggle="modal" href="#modaldemo1">إضافة منتج</a>
+									</div>
+								</div>
+							</div>
 							<div class="card-body">
 								<div class="table-responsive">
 									<table id="example1" class="table key-buttons text-md-nowrap" data-page-length="50">
@@ -82,6 +89,47 @@
 							</div>
 						</div>
 					</div>
+					<!-- Basic modal -->
+					<div class="modal" id="modaldemo1">
+						<div class="modal-dialog" role="document">
+							<div class="modal-content modal-content-demo">
+								<div class="modal-header">
+									<h6 class="modal-title">إضافة منتج</h6><button aria-label="Close" class="close" data-dismiss="modal" type="button"><span aria-hidden="true">&times;</span></button>
+								</div>
+								<div class="modal-body">
+									<form action="{{ route('products.store') }}" method="post">
+										{{ csrf_field() }}
+				
+										<div class="form-group">
+											<label for="exampleInputEmail1">إسم المنتج</label>
+											<input type="text" class="form-control" id="product_name" name="product_name">
+										</div>
+
+										<div class="form-group">
+											<label for="exampleInputEmail1">القسم</label>
+											<select name="section_id" id="section_id" class="form-control" required>
+												<option value="" selected disabled>--حدد القسم--</option>
+												@foreach($sections as $section)
+												<option value="{{ $section->id }}">{{ $section->section_name }}</option>
+												@endforeach
+											</select>
+										</div>
+				
+										<div class="form-group">
+											<label for="exampleFormControlTextarea1">ملاحظات</label>
+											<textarea class="form-control" id="description" name="description" rows="3"></textarea>
+										</div>
+				
+										<div class="modal-footer">
+											<button type="submit" class="btn btn-success">تاكيد</button>
+											<button type="button" class="btn btn-secondary" data-dismiss="modal">اغلاق</button>
+										</div>
+									</form>
+								</div>
+							</div>
+						</div>
+					</div>
+					<!-- End Basic modal -->
 				</div>
 				<!-- row closed -->
 			</div>

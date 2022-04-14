@@ -147,7 +147,7 @@
 								</div>
 							</div>
 						</div>
-					<!-- End Basic modal -->
+						<!-- End Basic modal -->
 				</div>
 				<!-- row closed -->
 
