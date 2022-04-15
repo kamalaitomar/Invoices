@@ -140,7 +140,7 @@
 
                                             <a class="modal-effect btn btn-sm btn-danger" data-effect="effect-scale"
                                                 data-id="{{ $product->id }}"
-                                                data-section_name="{{ $product->product_name }}" data-toggle="modal"
+                                                data-product_name="{{ $product->product_name }}" data-toggle="modal"
                                                 href="#modaldemo9" title="حذف"><i class="las la-trash"></i></a>
                                         </td>
                                     </tr>
@@ -219,7 +219,7 @@
                                 <label for="exampleInputEmail1">القسم</label>
                                 <select name="section_name" id="section_name" class="form-control">
                                     @foreach ($sections as $section)
-                                        <option {{$section->id }} >{{ $section->section_name }}</option>
+                                        <option {{ $section->id }}>{{ $section->section_name }}</option>
                                     @endforeach
                                 </select>
                             </div>
@@ -237,6 +237,32 @@
             </div>
         </div>
         <!-- End update modal -->
+        {{-- delete model --}}
+        <div class="modal" id="modaldemo9">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content modal-content-demo">
+                    <div class="modal-header">
+                        <h6 class="modal-title">حذف القسم</h6><button aria-label="Close" class="close"
+                            data-dismiss="modal" type="button"><span aria-hidden="true">&times;</span></button>
+                    </div>
+                    <form action="products/destroy" method="post">
+                        {{ method_field('delete') }}
+                        {{ csrf_field() }}
+                        <div class="modal-body">
+                            <p>هل انت متاكد من عملية الحذف ؟</p><br>
+                            <input type="hidden" name="id" id="id" value="">
+                            <input class="form-control" name="product_name" id="product_name" type="text" readonly>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">الغاء</button>
+                            <button type="submit" class="btn btn-danger">تاكيد</button>
+                        </div>
+                </div>
+                </form>
+            </div>
+        </div>
+        <!-- End delete modal -->
+
     </div>
     <!-- row closed -->
     </div>
@@ -276,6 +302,17 @@
             modal.find('.modal-body #section_name').val(section_name);
             modal.find('.modal-body #product_name').val(product_name);
             modal.find('.modal-body #description').val(description);
+        })
+    </script>
+
+    <script>
+        $('#modaldemo9').on('show.bs.modal', function(event) {
+            var button = $(event.relatedTarget)
+            var id = button.data('id')
+            var product_name = button.data('product_name')
+            var modal = $(this)
+            modal.find('.modal-body #id').val(id);
+            modal.find('.modal-body #product_name').val(product_name);
         })
     </script>
 @endsection
