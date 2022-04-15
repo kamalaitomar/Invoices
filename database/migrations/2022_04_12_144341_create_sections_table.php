@@ -17,7 +17,7 @@ return new class extends Migration
             $table->id();
             $table->string('section_name', 999);
             $table->text('description')->nullable();
-            $table->string('reated_by', 999);
+            $table->string('created_by', 999);
             $table->timestamps();
         });
     }

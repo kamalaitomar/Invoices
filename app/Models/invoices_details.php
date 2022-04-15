@@ -7,5 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class invoices_details extends Model
 {
-    use HasFactory;
+    use HasFactory;    
+    protected $guarded =[];
+
 }
