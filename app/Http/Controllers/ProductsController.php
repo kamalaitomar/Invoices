@@ -39,7 +39,7 @@ class ProductsController extends Controller
     public function store(Request $request)
     {
         $validated = $request->validate([
-            'product_name' => 'bail|required|unique:products|max:255',
+            'product_name' => 'bail|required|max:255',
             'section_id' => 'required',
             'description' => 'required',
         ],[
@@ -92,7 +92,18 @@ class ProductsController extends Controller
      */
     public function update(Request $request, products $products)
     {
-        //
+        $id = sections::where('section_name', $request->section_name)->first()->id;
+
+       $Products = Products::findOrFail($request->id);
+
+       $Products->update([
+       'product_name' => $request->product_name,
+       'description' => $request->description,
+       'section_id' => $id,
+       ]);
+
+       session()->flash('edit', 'تم تعديل المنتج بنجاح');
+       return back();
     }
 
     /**
