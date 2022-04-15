@@ -32,4 +32,6 @@ Route::resource('invoices', InvoicesController::class);
 Route::resource('sections', SectionsController::class);
 Route::resource('products', ProductsController::class);
 
+Route::get('section/{id}', [InvoicesController::class, 'getProducts']);
+
 Route::get('/{page}', [AdminController::class, 'index']);

@@ -31,6 +31,13 @@
 						<!--div-->
 						<div class="col-xl-12">
 							<div class="card mg-b-20">
+								<div class="card-header pb-0">
+									<div class="d-flex justify-content-between">
+										<div class="col-sm-6 col-md-4 col-xl-3">
+											<a href="invoices/create" class="modal-effect btn btn-outline-primary btn-block" >إضافة فاتورة</a>
+										</div>
+									</div>
+								</div>
 								<div class="card-body">
 									<div class="table-responsive">
 										<table id="example1" class="table key-buttons text-md-nowrap" data-page-length="50">
