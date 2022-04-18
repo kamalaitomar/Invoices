@@ -9,5 +9,4 @@ class invoices_details extends Model
 {
     use HasFactory;    
     protected $guarded =[];
-
 }

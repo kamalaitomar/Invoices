@@ -62,11 +62,15 @@
 													<?php $i++; ?>
 													<tr>
 														<td>{{ $i }}</td>
-														<td>{{ $invoice->invoice_number }}</td>
+														<td>
+															<a href="{{url('InvoicesDetails')}}/{{$invoice->id}}">
+																{{ $invoice->invoice_number }}
+															</a>
+														</td>
 														<td>{{ $invoice->invoice_date }}</td>
 														<td>{{ $invoice->due_date }}</td>
 														<td>{{ $invoice->product }}</td>
-														<td>{{ $invoice->section->section_name }}</td>
+														<td>{{ $invoice->section->section_name }}
 														<td>{{ $invoice->discount }}</td>
 														<td>{{ $invoice->value_vat }}</td>
 														<td>{{ $invoice->rate_vat }}</td>
