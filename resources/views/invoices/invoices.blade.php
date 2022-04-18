@@ -57,21 +57,24 @@
 													<th class="border-bottom-0">الملاحظات</th>
 												</tr>
 											</thead>
-											<tbody>
-												<tr>
-													<td>1</td>
-													<td>2345</td>
-													<td>06-04-2022</td>
-													<td>06-04-2022</td>
-													<td>High Gloss</td>
-													<td>KML</td>
-													<td>0%</td>
-													<td>15%</td>
-													<td>500</td>
-													<td>2300</td>
-													<td>مدفوعة</td>
-													<td>تم تسديد الفاتورة نقدا</td>
-												</tr>
+											<tbody><?php $i = 0; ?>
+												@foreach ($invoices as $invoice)
+													<?php $i++; ?>
+													<tr>
+														<td>{{ $i }}</td>
+														<td>{{ $invoice->invoice_number }}</td>
+														<td>{{ $invoice->invoice_date }}</td>
+														<td>{{ $invoice->due_date }}</td>
+														<td>{{ $invoice->product }}</td>
+														<td>{{ $invoice->section->section_name }}</td>
+														<td>{{ $invoice->discount }}</td>
+														<td>{{ $invoice->value_vat }}</td>
+														<td>{{ $invoice->rate_vat }}</td>
+														<td>{{ $invoice->total }}</td>
+														<td>{{ $invoice->status }}</td>
+														<td>{{ $invoice->note }}</td>
+													</tr>
+												@endforeach
 											</tbody>
 										</table>
 									</div>
