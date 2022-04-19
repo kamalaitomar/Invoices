@@ -35,5 +35,6 @@ Route::resource('products', ProductsController::class);
 
 Route::get('section/{id}', [InvoicesController::class, 'getProducts']);
 Route::get('InvoicesDetails/{id}', [InvoicesDetailsController::class, 'show']);
+Route::get('View_file/{invoice_number}/{file_name}', [InvoicesDetailsController::class, 'openFile']);
 
 Route::get('/{page}', [AdminController::class, 'index']);

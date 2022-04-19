@@ -3,9 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Models\invoices;
+use App\Models\invoices_attachments;
 use App\Models\invoices_details;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
 
 class InvoicesDetailsController extends Controller
 {
@@ -48,10 +50,11 @@ class InvoicesDetailsController extends Controller
      */
     public function show(invoices_details $invoices_details, $id)
     {
-        $invoiceDetails = DB::table('invoices_details')->where('id_invoice', $id)->first();
         $invoice = invoices::findOrFail($id); 
-        
-        return view('invoices.invoices_details', compact('invoiceDetails', 'invoice'));
+        $invoiceDetails = DB::table('invoices_details')->where('id_invoice', $id)->get();
+        $attachments = DB::table('invoices_attachments')->where('invoice_id', $id)->get();
+
+        return view('invoices.invoices_details', compact('invoiceDetails', 'invoice', 'attachments'));
     }
 
     /**
@@ -87,4 +90,12 @@ class InvoicesDetailsController extends Controller
     {
         //
     }
+
+
+
+    // public function openFile($invoice_number, $file_name)
+    // {
+    //     $files = $this->storage->getDriver()->getAdapter()->applyPathPrefix($invoice_number.'/'.$file_name);        
+    //     return response()->file($files);
+    // }
 }
