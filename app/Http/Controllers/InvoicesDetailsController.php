@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\invoices;
 use App\Models\invoices_attachments;
 use App\Models\invoices_details;
+use GuzzleHttp\Psr7\Response;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
@@ -93,9 +94,10 @@ class InvoicesDetailsController extends Controller
 
 
 
-    // public function openFile($invoice_number, $file_name)
-    // {
-    //     $files = $this->storage->getDriver()->getAdapter()->applyPathPrefix($invoice_number.'/'.$file_name);        
-    //     return response()->file($files);
-    // }
+    public function openFile($invoice_number, $file_name)
+    {
+        //file is stored under project/public/Attachments/invoice_number/file_name
+        $file= public_path(). "/Attachments/$invoice_number/$file_name";
+        return response()->file($file);
+    }
 }

@@ -153,7 +153,7 @@
                                                     <td>
                                                         <a class="btn btn-outline-success btn-sm"
                                                         href="{{ url('View_file') }}/{{ $invoice->invoice_number }}/{{ $attachment->file_name }}"
-                                                        role="button"><i class="fas fa-eye"></i>&nbsp;
+                                                        role="button" target="_blank"><i class="fas fa-eye"></i>&nbsp;
                                                         عرض</a>
 
                                                     {{-- <a class="btn btn-outline-info btn-sm"
