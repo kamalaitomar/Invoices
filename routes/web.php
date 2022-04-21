@@ -2,10 +2,12 @@
 
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\InvoicesAttachmentsController;
 use App\Http\Controllers\InvoicesController;
 use App\Http\Controllers\InvoicesDetailsController;
 use App\Http\Controllers\ProductsController;
 use App\Http\Controllers\SectionsController;
+use App\Models\invoices_attachments;
 use Illuminate\Support\Facades\Route;
 
 
@@ -32,6 +34,7 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 Route::resource('invoices', InvoicesController::class);
 Route::resource('sections', SectionsController::class);
 Route::resource('products', ProductsController::class);
+Route::resource('InvoiceAttachments', InvoicesAttachmentsController::class);
 
 Route::get('section/{id}', [InvoicesController::class, 'getProducts']);
 

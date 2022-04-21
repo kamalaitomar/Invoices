@@ -18,6 +18,48 @@
     <!-- breadcrumb -->
 @endsection
 @section('content')
+    @if ($errors->any())
+        <div class="alert alert-danger">
+            <ul>
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+    @endif
+    @if (session()->has('Add'))
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            <strong>{{ session()->get('Add') }}</strong>
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+    @endif
+    @if (session()->has('Error'))
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            <strong>{{ session()->get('Error') }}</strong>
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+    @endif
+    @if (session()->has('edit'))
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            <strong>{{ session()->get('edit') }}</strong>
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+    @endif
+
+    @if (session()->has('delete'))
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            <strong>{{ session()->get('delete') }}</strong>
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+    @endif
     <!-- row -->
     <div class="row">
         <div class="panel panel-primary tabs-style-3 bg-white w-100">
@@ -133,102 +175,124 @@
                         </table>
                     </div>
                     <div class="tab-pane" id="tab12">
-                        <table class="table mg-b-0 text-md-nowrap">
-                            <thead>
-                                <tr>
-                                    <th>#</th>
-                                    <th>اسم الملف</th>
-                                    <th>قام بالاضافة</th>
-                                    <th>تاريخ الإضافة</th>
-                                    <th>العمليات</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @php $x = 0 @endphp
-                                @foreach ($attachments as $attachment)
-                                    @php $x++ @endphp
+                        <!--المرفقات-->
+                        <div class="card card-statistics">
+                            <div class="card-body">
+                                <p class="text-danger">* صيغة المرفق pdf, jpeg ,.jpg , png </p>
+                                <h5 class="card-title">اضافة مرفقات</h5>
+                                <form method="post" action="{{ url('/InvoiceAttachments') }}"
+                                    enctype="multipart/form-data">
+                                    {{ csrf_field() }}
+                                    <div class="custom-file">
+                                        <input type="file" class="custom-file-input" id="customFile" name="file_name"
+                                            required>
+                                        <input type="hidden" id="customFile" name="invoice_number"
+                                            value="{{ $invoice->invoice_number }}">
+                                        <input type="hidden" id="invoice_id" name="invoice_id"
+                                            value="{{ $invoice->id }}">
+                                        <label class="custom-file-label" for="customFile">حدد
+                                            المرفق</label>
+                                    </div><br><br>
+                                    <button type="submit" class="btn btn-primary btn-sm " name="uploadedFile">تاكيد</button>
+                                </form>
+                            </div>
+                            <br>
+                            <table class="table mg-b-0 text-md-nowrap">
+                                <thead>
                                     <tr>
-                                        <th scope="row">$x</th>
-                                        <td>{{ $attachment->file_name }}</td>
-                                        <td>{{ $attachment->Created_by }}</td>
-                                        <td>{{ $attachment->created_at }}</td>
-                                        <td>
-                                            <a class="btn btn-outline-success btn-sm"
-                                                href="{{ url('View_file') }}/{{ $invoice->invoice_number }}/{{ $attachment->file_name }}"
-                                                role="button" target="_blank"><i class="fas fa-eye"></i>&nbsp;
-                                                عرض</a>
+                                        <th>#</th>
+                                        <th>اسم الملف</th>
+                                        <th>قام بالاضافة</th>
+                                        <th>تاريخ الإضافة</th>
+                                        <th>العمليات</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @php $x = 0 @endphp
+                                    @foreach ($attachments as $attachment)
+                                        @php $x++ @endphp
+                                        <tr>
+                                            <th scope="row">$x</th>
+                                            <td>{{ $attachment->file_name }}</td>
+                                            <td>{{ $attachment->Created_by }}</td>
+                                            <td>{{ $attachment->created_at }}</td>
+                                            <td>
+                                                <a class="btn btn-outline-success btn-sm"
+                                                    href="{{ url('View_file') }}/{{ $invoice->invoice_number }}/{{ $attachment->file_name }}"
+                                                    role="button" target="_blank"><i class="fas fa-eye"></i>&nbsp;
+                                                    عرض</a>
 
-                                            <a class="btn btn-outline-info btn-sm"
-                                                href="{{ url('Download_file') }}/{{ $invoice->invoice_number }}/{{ $attachment->file_name }}"
-                                                role="button" target="_blank"><i class="fas fa-download"></i>&nbsp;
-                                                تحميل</a>
+                                                <a class="btn btn-outline-info btn-sm"
+                                                    href="{{ url('Download_file') }}/{{ $invoice->invoice_number }}/{{ $attachment->file_name }}"
+                                                    role="button" target="_blank"><i class="fas fa-download"></i>&nbsp;
+                                                    تحميل</a>
 
-                                            
+
                                                 <button class="btn btn-outline-danger btn-sm" data-toggle="modal"
                                                     data-file_name="{{ $attachment->file_name }}"
                                                     data-invoice_number="{{ $attachment->invoice_number }}"
                                                     data-id_file="{{ $attachment->id }}"
                                                     data-target="#delete_file">حذف</button>
-                                        </td>
-                                    </tr>
-                                @endforeach
-                            </tbody>
-                        </table>
+                                            </td>
+                                        </tr>
+                                    @endforeach
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
                 </div>
             </div>
+
         </div>
+        <!-- row closed -->
+        <!-- delete -->
+        <div class="modal fade" id="delete_file" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+            aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">حذف المرفق</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <form action="{{ route('Delete_file') }}" method="post">
 
-    </div>
-    <!-- row closed -->
-    <!-- delete -->
-    <div class="modal fade" id="delete_file" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-        aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">حذف المرفق</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
+                        {{ csrf_field() }}
+                        <div class="modal-body">
+                            <p class="text-center">
+                            <h6 style="color:red"> هل انت متاكد من عملية حذف المرفق ؟</h6>
+                            </p>
+
+                            <input type="hidden" name="id_file" id="id_file" value="">
+                            <input type="hidden" name="file_name" id="file_name" value="">
+                            <input type="hidden" name="invoice_number" id="invoice_number" value="">
+
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">الغاء</button>
+                            <button type="submit" class="btn btn-danger">تاكيد</button>
+                        </div>
+                    </form>
                 </div>
-                <form action="{{ route('Delete_file') }}" method="post">
-
-                    {{ csrf_field() }}
-                    <div class="modal-body">
-                        <p class="text-center">
-                        <h6 style="color:red"> هل انت متاكد من عملية حذف المرفق ؟</h6>
-                        </p>
-
-                        <input type="hidden" name="id_file" id="id_file" value="">
-                        <input type="hidden" name="file_name" id="file_name" value="">
-                        <input type="hidden" name="invoice_number" id="invoice_number" value="">
-
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-default" data-dismiss="modal">الغاء</button>
-                        <button type="submit" class="btn btn-danger">تاكيد</button>
-                    </div>
-                </form>
             </div>
         </div>
-    </div>
     </div>
     <!-- Container closed -->
     </div>
     <!-- main-content closed -->
 @endsection
 @section('js')
-<script>
-    $('#delete_file').on('show.bs.modal', function(event) {
-        var button = $(event.relatedTarget)
-        var id_file = button.data('id_file')
-        var file_name = button.data('file_name')
-        var invoice_number = button.data('invoice_number')
-        var modal = $(this)
-        modal.find('.modal-body #id_file').val(id_file);
-        modal.find('.modal-body #file_name').val(file_name);
-        modal.find('.modal-body #invoice_number').val(invoice_number);
-    })
-</script>
+    <script>
+        $('#delete_file').on('show.bs.modal', function(event) {
+            var button = $(event.relatedTarget)
+            var id_file = button.data('id_file')
+            var file_name = button.data('file_name')
+            var invoice_number = button.data('invoice_number')
+            var modal = $(this)
+            modal.find('.modal-body #id_file').val(id_file);
+            modal.find('.modal-body #file_name').val(file_name);
+            modal.find('.modal-body #invoice_number').val(invoice_number);
+        })
+    </script>
 @endsection
