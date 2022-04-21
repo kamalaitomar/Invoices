@@ -156,12 +156,12 @@
                                                         role="button" target="_blank"><i class="fas fa-eye"></i>&nbsp;
                                                         عرض</a>
 
-                                                    {{-- <a class="btn btn-outline-info btn-sm"
-                                                        href="{{ url('download') }}/{{ $invoices->invoice_number }}/{{ $attachment->file_name }}"
-                                                        role="button"><i
+                                                    <a class="btn btn-outline-info btn-sm"
+                                                        href="{{ url('Download_file') }}/{{ $invoice->invoice_number }}/{{ $attachment->file_name }}"
+                                                        role="button" target="_blank"><i
                                                             class="fas fa-download"></i>&nbsp;
                                                         تحميل</a>
-
+                                                    {{-- 
                                                     @can('حذف المرفق')
                                                         <button class="btn btn-outline-danger btn-sm"
                                                             data-toggle="modal"

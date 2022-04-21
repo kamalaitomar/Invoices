@@ -93,11 +93,18 @@ class InvoicesDetailsController extends Controller
     }
 
 
-
     public function openFile($invoice_number, $file_name)
     {
         //file is stored under project/public/Attachments/invoice_number/file_name
         $file= public_path(). "/Attachments/$invoice_number/$file_name";
         return response()->file($file);
+    }
+
+
+    public function DownloadFile($invoice_number, $file_name)
+    {
+        //file is stored under project/public/Attachments/invoice_number/file_name
+        $file= public_path(). "/Attachments/$invoice_number/$file_name";
+        return response()->download($file);
     }
 }
