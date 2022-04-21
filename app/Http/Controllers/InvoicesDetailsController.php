@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\invoices;
 use App\Models\invoices_attachments;
 use App\Models\invoices_details;
+use Faker\Core\File;
 use GuzzleHttp\Psr7\Response;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -87,9 +88,16 @@ class InvoicesDetailsController extends Controller
      * @param  \App\Models\invoices_details  $invoices_details
      * @return \Illuminate\Http\Response
      */
-    public function destroy(invoices_details $invoices_details)
+    public function destroy(Request $request, invoices_details $invoices_details)
     {
-        //
+        Storage::disk('public_uploads')->delete($request->invoice_number.'/'.$request->file_name);
+
+        $attachment = invoices_attachments::findOrFail($request->id_file);
+        $attachment->delete();
+       
+        session()->flash('delete', 'تم حذف المرفق بنجاح');
+        return back();  
+
     }
 
 
