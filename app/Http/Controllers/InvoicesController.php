@@ -135,7 +135,34 @@ class InvoicesController extends Controller
      */
     public function update(Request $request, invoices $invoices)
     {
-        //
+       $invoice = invoices::findOrFail($request->invoice) ;
+       $invoice->update([
+            'invoice_number' => $request->invoice_number,
+            'invoice_date' => $request->invoice_date,
+            'due_date' => $request->due_date,
+            'product' => $request->product,
+            'section_id' => $request->section_id,
+            'amount_collection' => $request->amount_collection,
+            'amount_commission' => $request->amount_Commission,
+            'discount' => $request->discount,
+            'value_VAT' => $request->value_VAT,
+            'rate_VAT' => $request->rate_VAT,
+            'total' => $request->total,
+            'note' => $request->note,
+        ]);
+
+        // $invoice_datails = invoices_details::where('id_Invoice', $request->invoice);
+        // $invoice_datails->update([
+        //     'id_Invoice' => $request->invoice,
+        //     'invoice_number' => $request->invoice_number,
+        //     'product' => $request->product,
+        //     'Section' => $request->section_id,
+        //     'note' => $request->note,
+        //     'user' => (Auth::user()->name),
+        // ]);
+
+        session()->flash('edit', 'تم تعديل الفاتورة بنجاح');
+        return back();
     }
 
     /**

@@ -29,9 +29,9 @@
 @endsection
 @section('content')
 
-    @if (session()->has('Add'))
+    @if (session()->has('edit'))
         <div class="alert alert-success alert-dismissible fade show" role="alert">
-            <strong>{{ session()->get('Add') }}</strong>
+            <strong>{{ session()->get('edit') }}</strong>
             <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
             </button>
@@ -44,8 +44,9 @@
         <div class="col-lg-12 col-md-12">
             <div class="card">
                 <div class="card-body">
-                    <form action="" method="post" enctype="multipart/form-data"
+                    <form action="{{ route('invoices.update', ['invoice'=>$invoice->id]) }}" method="post" enctype="multipart/form-data"
                         autocomplete="off">
+                        {{ method_field('patch') }}
                         {{ csrf_field() }}
                         {{-- 1 --}}
 
@@ -53,7 +54,7 @@
                             <div class="col">
                                 <label for="invoice_number" class="control-label">رقم الفاتورة</label>
                                 <input type="text" class="form-control" id="invoice_number" name="invoice_number"
-                                    title="يرجي ادخال رقم الفاتورة" value="{{ $invoice->invoice_number }}" required>
+                                    title="يرجي ادخال رقم الفاتورة" value="{{ $invoice->invoice_number }}" readonly>
                             </div>
 
                             <div class="col">
@@ -76,7 +77,7 @@
                                 <select name="section_id" class="form-control SlectBox" onclick="console.log($(this).val())"
                                     onchange="console.log('change is firing')">
                                     <!--placeholder-->
-                                    <option value="{{ $invoice->section_id }}" disabled>{{ $invoice->section->section_name }}</option>
+                                    <option value="{{ $invoice->section_id }}">{{ $invoice->section->section_name }}</option>
                                     @foreach ($sections as $section)
                                         <option value="{{ $section->id }}"> {{ $section->section_name }}</option>
                                     @endforeach
@@ -122,8 +123,8 @@
                                 <label for="inputName" class="control-label">نسبة ضريبة القيمة المضافة</label>
                                 <select name="rate_VAT" id="rate_VAT" class="form-control" onchange="myFunction()">
                                     <!--placeholder-->
-                                    <option value="{{ $invoice->rate_vat }}" selected disabled>{{ $invoice->rate_vat }}</option>
-                                    <option value=" 5%">5%</option>
+                                    <option value="{{ $invoice->rate_vat }}" selected>{{ $invoice->rate_vat }}</option>
+                                    <option value="5%">5%</option>
                                     <option value="10%">10%</option>
                                 </select>
                             </div>
@@ -150,14 +151,6 @@
                                 <label for="exampleTextarea">ملاحظات</label>
                                 <textarea class="form-control" id="exampleTextarea" name="note" rows="3">{{ $invoice->note }}</textarea>
                             </div>
-                        </div><br>
-
-                        <p class="text-danger">* صيغة المرفق pdf, jpeg ,.jpg , png </p>
-                        <h5 class="card-title">المرفقات</h5>
-
-                        <div class="col-sm-12 col-md-12">
-                            <input type="file" name="pic" class="dropify"
-                                accept=".pdf,.jpg, .png, image/jpeg, image/png" data-height="70" />
                         </div><br>
 
                         <div class="d-flex justify-content-center">
