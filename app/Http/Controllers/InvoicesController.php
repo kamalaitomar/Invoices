@@ -119,9 +119,11 @@ class InvoicesController extends Controller
      * @param  \App\Models\invoices  $invoices
      * @return \Illuminate\Http\Response
      */
-    public function edit(invoices $invoices)
+    public function edit($id)
     {
-        //
+       $invoice = invoices::where('id',$id)->first();
+       $sections = sections::all();
+       return view('invoices.edit_invoice', compact('invoice', 'sections'));
     }
 
     /**
