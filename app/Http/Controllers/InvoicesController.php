@@ -153,15 +153,15 @@ class InvoicesController extends Controller
             'note' => $request->note,
         ]);
 
-        // $invoice_datails = invoices_details::where('id_Invoice', $request->invoice);
-        // $invoice_datails->update([
-        //     'id_Invoice' => $request->invoice,
-        //     'invoice_number' => $request->invoice_number,
-        //     'product' => $request->product,
-        //     'Section' => $request->section_id,
-        //     'note' => $request->note,
-        //     'user' => (Auth::user()->name),
-        // ]);
+        $invoice_datails = invoices_details::where('id_Invoice', $request->invoice);
+        $invoice_datails->update([
+            'id_Invoice' => $request->invoice,
+            'invoice_number' => $request->invoice_number,
+            'product' => $request->product,
+            'Section' => $request->section_id,
+            'note' => $request->note,
+            'user' => (Auth::user()->name),
+        ]);
 
         session()->flash('edit', 'تم تعديل الفاتورة بنجاح');
         return back();
