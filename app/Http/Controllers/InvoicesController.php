@@ -110,9 +110,10 @@ class InvoicesController extends Controller
      * @param  \App\Models\invoices  $invoices
      * @return \Illuminate\Http\Response
      */
-    public function show(invoices $invoices)
+    public function show($id)
     {
-        //
+       $invoice = invoices::where('id', $id)->first();
+       return view('invoices.invoice_status', compact('invoice'));
     }
 
     /**
