@@ -180,12 +180,12 @@ class InvoicesController extends Controller
         $attachments = invoices_attachments::where('invoice_id', $id)->first();
 
         
-        // if (!empty($attachments->invoice_number)) {
-        //     Storage::disk('public_uploads')->deleteDirectory($invoice->invoice_number);
-        // }
-        // $invoice->forceDelete();
+        if (!empty($attachments->invoice_number)) {
+            Storage::disk('public_uploads')->deleteDirectory($invoice->invoice_number);
+        }
+        $invoice->forceDelete();
         
-        $invoice->Delete();
+        // $invoice->Delete();
         session()->flash('delete_invoice');
         return Redirect('/invoices');
     }
