@@ -146,7 +146,7 @@
                                 @foreach ($invoiceDetails as $detail)
                                     @php $i++ @endphp
                                     <tr>
-                                        <th scope="row">$i</th>
+                                        <th scope="row">{{$i}}</th>
                                         <td>{{ $detail->invoice_number }}</td>
                                         <td>{{ $detail->product }}</td>
                                         <td>{{ $invoice->section->section_name }}</td>
@@ -212,7 +212,7 @@
                                     @foreach ($attachments as $attachment)
                                         @php $x++ @endphp
                                         <tr>
-                                            <th scope="row">$x</th>
+                                            <th scope="row">{{$x}}</th>
                                             <td>{{ $attachment->file_name }}</td>
                                             <td>{{ $attachment->Created_by }}</td>
                                             <td>{{ $attachment->created_at }}</td>
