@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\InvoicesArchiveController;
 use App\Http\Controllers\InvoicesAttachmentsController;
 use App\Http\Controllers\InvoicesController;
 use App\Http\Controllers\InvoicesDetailsController;
@@ -35,6 +36,7 @@ Route::resource('invoices', InvoicesController::class);
 Route::resource('sections', SectionsController::class);
 Route::resource('products', ProductsController::class);
 Route::resource('InvoiceAttachments', InvoicesAttachmentsController::class);
+Route::resource('archivedInvoices', InvoicesArchiveController::class);
 
 Route::get('section/{id}', [InvoicesController::class, 'getProducts']);
 Route::get('paidInvoices', [InvoicesController::class, 'paid'])->name('paidInvoices');
