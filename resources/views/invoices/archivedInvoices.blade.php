@@ -27,11 +27,11 @@
     <!-- breadcrumb -->
 @endsection
 @section('content')
-	@if (session()->has('delete_invoice'))
+	@if (session()->has('archive_invoice'))
 	<script>
 		window.onload = function() {
 			notif({
-				msg: "تم حذف الفاتورة بنجاح",
+				msg: "تمت ارشفت الفاتورة بنجاح",
 				type: "success",
 				width: "all",
 				position: "center"
