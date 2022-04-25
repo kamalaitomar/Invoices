@@ -23,7 +23,8 @@ class InvoicesController extends Controller
     public function index()
     {
         $invoices = invoices::all();
-        return view('invoices.invoices', compact('invoices'));
+        $title = "قائمة الفواتير";
+        return view('invoices.invoices', compact('invoices','title'));
     }
 
     /**
@@ -196,5 +197,25 @@ class InvoicesController extends Controller
     {
         $products = DB::table('products')->where('section_id', $id)->pluck('product_name', 'id');
         return json_encode($products);
+    }
+
+
+    public function paid()
+    {
+        $invoices = invoices::where('value_status', 1)->get();
+        $title = "الفواتير المدفوعة";
+        return view('invoices.invoices', compact('invoices','title'));
+    }
+    public function unpaid()
+    {
+        $invoices = invoices::where('value_status', 2)->get();
+        $title = "الفواتير الغير المدفوعة";
+        return view('invoices.invoices', compact('invoices','title'));
+    }
+    public function partial()
+    {
+        $invoices = invoices::where('value_status', 3)->get();
+        $title = "الفواتير المدفوعة جزئيا";
+        return view('invoices.invoices', compact('invoices','title'));
     }
 }
