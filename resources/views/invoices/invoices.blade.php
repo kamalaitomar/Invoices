@@ -34,7 +34,17 @@
                 notif({
                     msg: "تم حذف الفاتورة بنجاح",
                     type: "success",
-                    width: "all",
+                    position: "center"
+                })
+            }
+        </script>
+    @endif
+    @if (session()->has('restore_invoice'))
+        <script>
+            window.onload = function() {
+                notif({
+                    msg: "تمت استعادة الفاتورة بنجاح",
+                    type: "success",
                     position: "center"
                 })
             }

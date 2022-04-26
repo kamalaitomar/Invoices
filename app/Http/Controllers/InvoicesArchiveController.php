@@ -72,7 +72,11 @@ class InvoicesArchiveController extends Controller
      */
     public function update(Request $request, invoicesArchive $invoicesArchive)
     {
-        //
+        $invoive = invoices::withTrashed()->where('id', $request->invoice_id)->restore();
+
+        session()->flash('restore_invoice');
+        return Redirect('/invoices');
+
     }
 
     /**
