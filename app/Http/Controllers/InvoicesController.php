@@ -223,4 +223,12 @@ class InvoicesController extends Controller
         $title = "الفواتير المدفوعة جزئيا";
         return view('invoices.invoices', compact('invoices','title'));
     }
+
+
+    public function print($id)
+    {
+        $invoice = invoices::where('id', $id)->first();
+        $title = "طباعة الفاتورة";
+        return view('invoices.print_invoice', compact('invoice','title'));
+    }
 }

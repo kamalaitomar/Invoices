@@ -129,6 +129,8 @@
                                                             data-invoice_id="{{ $invoice->id }}" data-toggle="modal"
                                                             data-target="#Transfer_invoice"><i
                                                             class="text-warning fas fa-exchange-alt"></i>&nbsp;&nbsp; نقل الى الارشيف</a>
+                                                        <a class="dropdown-item" href="printInvoice/{{ $invoice->id }}"><i
+                                                            class="text-success fas fa-print"></i>&nbsp;&nbsp;طباعةالفاتورة</a>
                                                         <a class="dropdown-item" href="#"
                                                             data-invoice_id="{{ $invoice->id }}" data-toggle="modal"
                                                             data-target="#delete_invoice"><i

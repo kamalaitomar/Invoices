@@ -42,6 +42,7 @@ Route::get('section/{id}', [InvoicesController::class, 'getProducts']);
 Route::get('paidInvoices', [InvoicesController::class, 'paid'])->name('paidInvoices');
 Route::get('unpaidInvoices', [InvoicesController::class, 'unpaid'])->name('unpaidInvoices');
 Route::get('partialInvoices', [InvoicesController::class, 'partial'])->name('partialInvoices');
+Route::get('printInvoice/{id}', [InvoicesController::class, 'print'])->name('printInvoice');
 
 Route::get('InvoicesDetails/{id}', [InvoicesDetailsController::class, 'show']);
 Route::post('/Status_Update/{id}', [InvoicesDetailsController::class, 'update'])->name('Status_Update');
