@@ -76,7 +76,6 @@ class InvoicesArchiveController extends Controller
 
         session()->flash('restore_invoice');
         return Redirect('/invoices');
-
     }
 
     /**
@@ -85,8 +84,12 @@ class InvoicesArchiveController extends Controller
      * @param  \App\Models\invoicesArchive  $invoicesArchive
      * @return \Illuminate\Http\Response
      */
-    public function destroy(invoicesArchive $invoicesArchive)
+    public function destroy(Request $request, invoicesArchive $invoicesArchive)
     {
-        //
+        $invoive = invoices::withTrashed()->where('id', $request->invoice_id)->first();
+        $invoive->forceDelete();
+
+        session()->flash('delete_invoice');
+        return Redirect('/archivedInvoices');
     }
 }
